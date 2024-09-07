@@ -30,3 +30,6 @@ Abra um pull request!
 * JavaScript
 
 **#ecologia #meioambiente #reciclagem**
+
+No momento o site ainda esta em desenvolvimento.
+Utilizei das aulas da imersão dev da alura com o google gemini para iniciar esse projeto.
