@@ -15,9 +15,6 @@ O EcoGuia é um projeto que nasceu da vontade de facilitar a vida de quem se pre
 **Cidades disponíveis:**
 
 * Vargem Grande Paulista
-* Cotia
-* Itapevi
-* Osasco
 
 **Quer contribuir?**
 
