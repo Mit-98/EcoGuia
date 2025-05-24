@@ -1,189 +1,292 @@
-/* Importa a fonte Chakra Petch do Google Fonts */
-@import url('https://fonts.google.com/share?selection.family=Rubik:ital,wght@0,300..900;1,300..900');
+/* style.css */
+
+/* Importa a fonte Rubik do Google Fonts (link correto) */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 /* Estiliza o corpo da página */
 body {
-    font-family: "Rubik", sans-serif; /* Define a fonte padrão */
-    background-color: #A9CCE3; /* Cor de fundo da página */
-    display: flex; /* Usa Flexbox para layout */
-    flex-direction: column; /* Alinha os itens na vertical */
-    align-items: center; /* Centraliza os itens horizontalmente */
-    justify-content: center; /* Centraliza os itens verticalmente */
-    height: 100%; /* Preenche a altura total da viewport */
-    margin: 0; /* Remove a margem padrão */
-    padding: 0; /* Remove o padding padrão */
-}
- 
-/* Estiliza os títulos h1 */
-header {
+    font-family: "Rubik", sans-serif;
+    background-color: #A9CCE3;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 0; /* Remove a margem padrão */
-    padding: 0; /* Remove o padding padrão */
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
-main{
-    flex-direction: column;
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+/* Estiliza a tag header */
+header {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px;
+    padding: 40px 0;
 }
 
-
-
-/* Estiliza as seções da página */
-section {
-    display: flex; /* Usa Flexbox para layout */
-    flex-direction: column; /* Alinha os itens na vertical */
-    align-items: center; /* Centraliza os itens horizontalmente */
-    margin-bottom: 3rem; /* Espaçamento abaixo de cada seção */
+/* Estiliza a seção que contém o formulário de pesquisa */
+/* A seção principal já tem display: flex e flex-direction: column */
+main section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    width: 100%;
 }
+
+/* Estiliza o formulário de pesquisa para centralizar seus elementos */
+form {
+    display: flex; /* Transforma o formulário em um contêiner flex */
+    flex-direction: column; /* Coloca os itens (input e button) em coluna */
+    align-items: center; /* Centraliza horizontalmente os itens dentro do formulário */
+    width: 100%; /* Garante que o formulário ocupe a largura total de sua seção pai */
+}
+
 
 /* Estiliza os inputs dentro das seções */
 section input {
-    width: 30rem; /* Largura dos inputs */
-    border: none; /* Remove a borda padrão */
-    padding: 1rem; /* Espaçamento interno */
-    border-radius: 1.5rem; /* Borda arredondada */
-    margin-bottom: 1rem; /* Espaçamento abaixo dos inputs */
-    color: #45474B; /* Cor do texto */
-    font-size: 1rem; /* Tamanho da fonte */
-    box-sizing: border-box; /* Inclui padding e border na largura total */
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+    width: 30rem;
+    border: none;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    margin-bottom: 1rem;
+    background-color: #ffffff;   
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* Removido: flex-direction, display, justify-content, align-items, pois o form já fará isso */
 }
 
 /* Estiliza os botões dentro das seções */
 section button {
-    padding: 0.8rem 1.2rem; /* Espaçamento interno do botão */
-    border: none; /* Remove a borda padrão */
-    border-radius: 1.5rem; /* Borda arredondada */
-    background-color: #30475E; /* Cor de fundo do botão */
-    color: #F5F7F8; /* Cor do texto do botão */
-    font-size: 1rem; /* Tamanho da fonte */
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 1.5rem;
+    background-color: #ffffff;
+    color: #3d3c3c;
+    font-size: 1rem;
+    cursor: pointer;
+    /* Removido: flex-direction, display, justify-content, align-items, pois o form já fará isso */
 }
 
 /* Adiciona efeito hover ao botão de pesquisa */
 section button:hover {
-    background-color: #30475E; /* Muda a cor de fundo ao passar o mouse */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra mais intensa */
+    background-color: #26384C;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Estiliza a caixa de resultados da pesquisa */
-.resultados-pesquisa {
-    width: 60rem; /* Largura máxima da caixa de resultados */
-    height: 46vh; /* Altura máxima da caixa de resultados */
-    overflow-y: auto; /* Adiciona rolagem vertical se necessário */
-    margin-top: 1rem; /* Espaçamento acima da caixa de resultados */
-    padding: 1rem; /* Espaçamento interno */
-    border-radius: 0.6rem; /* Borda arredondada */
-    
+#resultados-pesquisa {
+    width: 60rem;
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #45474B;
+    margin-bottom: 3rem;
+    display: none;
 }
 
-/* Estiliza cada item de resultado */
+/* Estiliza cada item de resultado (bloco principal da cidade) */
 .item-resultado {
-    background: #FFFFFF; /* Cor de fundo dos itens */
-    border-radius: 0.6rem; /* Borda arredondada */
-    padding: 1rem; /* Espaçamento interno */
-    margin-bottom: 1rem; /* Espaçamento abaixo dos itens */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    background: #F5F7F8;
+    border-radius: 0.6rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
 }
 
-/* Estiliza os títulos dentro dos itens de resultado */
 .item-resultado h2 {
-    font-size: 1.5rem; /* Tamanho da fonte */
-    color: #222831; /* Cor do texto */
+    font-size: 1.8rem;
+    color: #222831;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
-/* Estiliza os links dentro dos itens de resultado */
+.item-resultado p {
+    margin-bottom: 5px;
+    line-height: 1.5;
+    color: #45474B;
+}
+
 .item-resultado a {
-    text-decoration: none; /* Remove o sublinhado padrão dos links */
-    color: #30475E; /* Cor do texto dos links */
+    text-decoration: none;
+    color: #30475E;
+    font-weight: bold;
 }
 
-/* Estiliza os links quando são passados o mouse sobre */
 .item-resultado a:hover {
-    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    text-decoration: underline;
 }
 
-/* Estiliza a descrição meta dentro dos itens de resultado */
-.descricao-meta {
-    color: #45474B; /* Cor do texto */
-    margin: 0.5rem 0; /* Margem acima e abaixo */
+/* Estilos para a seção de pontos de coleta */
+.pontos-coleta-section h3 {
+    color: #222831;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+/* Estilos para a tabela de pontos de coleta */
+.tabela-pontos-coleta {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #FFFFFF;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tabela-pontos-coleta th,
+.tabela-pontos-coleta td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #E0E0E0;
+    color: #45474B;
+    vertical-align: top;
+}
+
+.tabela-pontos-coleta th {
+    background-color: #F5F7F8;
+    color: #222831;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+.tabela-pontos-coleta tbody tr:nth-child(even) {
+    background-color: #F9F9F9;
+}
+
+.tabela-pontos-coleta tbody tr:hover {
+    background-color: #EFEFEF;
+}
+
+.tabela-pontos-coleta td a {
+    color: #30475E;
+    text-decoration: none;
+}
+
+.tabela-pontos-coleta td a:hover {
+    text-decoration: underline;
 }
 
 /* Estiliza o rodapé da página */
 footer {
-    background-color: #F5F7F8; /* Cor de fundo do rodapé */
-    color: #45474B; /* Cor do texto */
-    height: 12%;
-    max-height: 12%;
-    min-height: 10%;
-    text-align: center; /* Alinha o texto ao centro */
-    padding: 0; /* Espaçamento interno */
-    width: 100%; /* Largura total da página */
-    position: absolute; /* Posiciona o rodapé */
-    bottom: 0; /* Alinha ao fundo da página */
-    font-size: 1rem; /* Tamanho da fonte */
+    background-color: #A9CCE3;
+    color: #3d3c3c;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+    margin-top: auto;
+    font-size: 75%;
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem; /* Tamanho da fonte em telas menores */
-        letter-spacing: 0.2rem; /* Espaçamento entre letras em telas menores */
-    }
-
     section input {
-        width: 25rem; /* Largura dos inputs em telas menores */
-        padding: 0.8rem; /* Espaçamento interno em telas menores */
+        width: 25rem;
+        padding: 0.8rem;
     }
 
-    .resultados-pesquisa {
-        width: 40rem; /* Largura da caixa de resultados em telas menores */
-        height: 40vh; /* Altura da caixa de resultados em telas menores */
+    #resultados-pesquisa {
+        width: 90%;
+        max-height: 70vh;
+        height: auto;
     }
 
     .item-resultado h2 {
-        font-size: 1.3rem; /* Tamanho da fonte dos títulos em telas menores */
+        font-size: 1.3rem;
     }
+
+    /* Responsividade para a tabela em telas menores */
+    .tabela-pontos-coleta,
+    .tabela-pontos-coleta thead,
+    .tabela-pontos-coleta tbody,
+    .tabela-pontos-coleta th,
+    .tabela-pontos-coleta td,
+    .tabela-pontos-coleta tr {
+        display: block;
+    }
+
+    .tabela-pontos-coleta thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .tabela-pontos-coleta tr {
+        border: 1px solid #E0E0E0;
+        margin-bottom: 10px;
+        border-radius: 0.6rem;
+    }
+
+    .tabela-pontos-coleta td {
+        border: none;
+        border-bottom: 1px solid #E0E0E0;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    .tabela-pontos-coleta td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    /* Rótulos para cada coluna */
+    .tabela-pontos-coleta td:nth-of-type(1):before { content: "Tipo de Resíduo:"; }
+    .tabela-pontos-coleta td:nth-of-type(2):before { content: "Nome/Serviço:"; }
+    .tabela-pontos-coleta td:nth-of-type(3):before { content: "Endereço / Contato:"; }
+    .tabela-pontos-coleta td:nth-of-type(4):before { content: "Observações:"; }
 }
 
-/* Responsividade para celulares */
 @media (max-width: 480px) {
-
-    h1 {
-        font-size: 1.8rem; /* Tamanho da fonte em telas pequenas */
-        letter-spacing: 0.1rem; /* Espaçamento entre letras em telas pequenas */
-    }
-
     section input {
-        width: 17rem; /* Largura total dos inputs em telas pequenas */
+        width: 17rem;
     }
 
     section button {
-        padding: 0.6rem 1rem; /* Espaçamento interno do botão em telas pequenas */
-        font-size: 0.9rem; /* Tamanho da fonte do botão em telas pequenas */
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
     }
 
-    .resultados-pesquisa {
-        width: 90%; /* Largura da caixa de resultados em telas pequenas */
-        height: 50vh; /* Altura da caixa de resultados em telas pequenas */
+    #resultados-pesquisa {
+        width: 95%;
+        max-height: 60vh;
+        height: auto;
     }
 
     .item-resultado h2 {
-        font-size: 1.1rem; /* Tamanho da fonte dos títulos em telas pequenas */
+        font-size: 1.1rem;
     }
 
     footer {
-        font-size: 0.9rem; /* Tamanho da fonte do rodapé em telas pequenas */
+        font-size: 0.9rem;
+    }
+
+    /* Ajustes para a tabela em telas muito pequenas */
+    .tabela-pontos-coleta td {
+        padding-left: 40%;
+    }
+    .tabela-pontos-coleta td:before {
+        width: 35%;
     }
 }
