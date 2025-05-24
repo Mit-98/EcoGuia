@@ -9,19 +9,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <body>
     <header>
-
-        <img src="ecoguia.png" alt="Logo EcoGuia">  </header>  
-
+        <img src="ecoguia.png" alt="Logo EcoGuia">
     </header>
+    
     <main>
         <section>
-            <input type="text" placeholder="Digite o nome da sua cidade ou município" id="campo-pesquisa">
-            <button onclick="pesquisar()">Pesquisar</button>
+        <form onsubmit="pesquisar(); return false;" aria-label="Pesquisar cidade para coleta">
+        <label for="campo-pesquisa" class="visually-hidden">Nome da cidade</label>
+        <input type="text" id="campo-pesquisa" placeholder="Digite o nome da sua cidade ou município" aria-required="true">
+        <button type="submit">Pesquisar</button>
+        </form>
         </section>
+
 
          <section class="resultados-pesquisa" id="resultados-pesquisa">
 
@@ -42,3 +47,4 @@
 </body>
 
 </html>
+
