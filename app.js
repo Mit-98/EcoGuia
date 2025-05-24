@@ -1,38 +1,79 @@
+// app.js
+
 function pesquisar() {
-  // Obtém a seção HTML onde os resultados da pesquisa serão exibidos.
-  const section = document.getElementById("resultados-pesquisa");
-  // Obtém o valor do campo de pesquisa, convertendo-o para letras minúsculas para facilitar a comparação.
-  const campoPesquisa = document.getElementById("campo-pesquisa").value.toLowerCase();
+    const section = document.getElementById("resultados-pesquisa");
+    const campoPesquisa = document.getElementById("campo-pesquisa").value.toLowerCase().trim();
 
-  // Verifica se o campo de pesquisa está vazio. Se estiver, exibe uma mensagem e encerra a função.
-  if (!campoPesquisa) {
-    section.innerHTML = "Digite algo na barra de pesquisa";
-    return;
-  }
+    // Adiciona esta linha para garantir que a seção esteja visível ao iniciar uma pesquisa
+    section.style.display = 'block'; // Torna a seção visível
 
-  // Inicializa uma string vazia para armazenar os resultados da pesquisa.
-  let resultados = "";
-
-  // Itera sobre cada dado na lista de dados.
-  for (let dado of dados) {
-    // Verifica se o título do dado contém o termo de pesquisa (ignorando maiúsculas e minúsculas).
-    if (dado.titulo.toLowerCase().includes(campoPesquisa)) {
-      // Se o título corresponder, cria um elemento HTML para exibir o resultado da pesquisa.
-      resultados += `
-        <div class="item-resultado">
-          <h2>${dado.titulo}</h2>
-          <p>${dado.descricao}</p>
-          <a href="${dado.link}" target="_blank">Para mais informações clique aqui</a>
-        </div>
-      `;
+    if (!campoPesquisa) {
+        section.innerHTML = "<p>Por favor, digite algo na barra de pesquisa!</p>";
+        // Se a pesquisa estiver vazia, pode ser útil ocultar a seção novamente ou deixá-la visível com a mensagem.
+        // Para este caso, vamos deixá-la visível com a mensagem.
+        return;
     }
 
-    // Se nenhum resultado foi encontrado, exibe uma mensagem informando.
-    if (!resultados) {
-      resultados = "Nenhum resultado encontrado";
-    }
-  }
+    section.innerHTML = ''; // Limpa resultados anteriores
 
-  // Atualiza o conteúdo da seção de resultados com os resultados encontrados.
-  section.innerHTML = resultados;
+    const cidadeEncontrada = dados.find(dado => {
+        const tituloMatches = dado.titulo && dado.titulo.toLowerCase().includes(campoPesquisa);
+        const localidadeMatches = dado.localidade && dado.localidade.toLowerCase().includes(campoPesquisa);
+        return tituloMatches || localidadeMatches;
+    });
+
+    if (cidadeEncontrada) {
+        let resultadosHTML = '';
+
+        // Exibe as informações gerais da cidade
+        resultadosHTML += `
+            <div class="item-resultado">
+                <h2>${cidadeEncontrada.titulo}</h2>
+                <p>${cidadeEncontrada.descricao || ''}</p>
+                ${cidadeEncontrada.link ? `<p><a href="${cidadeEncontrada.link}" target="_blank">Para mais informações clique aqui</a></p>` : ''}
+            </div>
+        `;
+
+        // Se a cidade encontrada tiver pontos de coleta, exiba-os em uma tabela
+        if (cidadeEncontrada.pontosDeColeta && cidadeEncontrada.pontosDeColeta.length > 0) {
+            resultadosHTML += `
+                <div class="pontos-coleta-section">
+                    <h3>Pontos de Descarte e Coleta em ${cidadeEncontrada.titulo}:</h3>
+                    <table class="tabela-pontos-coleta">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Resíduo</th>
+                                <th>Nome/Serviço</th>
+                                <th>Endereço / Contato</th>
+                                <th>Observações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            cidadeEncontrada.pontosDeColeta.forEach(ponto => {
+                resultadosHTML += `
+                            <tr>
+                                <td>${ponto.tipoDeResiduo || ''}</td>
+                                <td>${ponto.nomeServico || ''}</td>
+                                <td>${ponto.contato || ''}</td>
+                                <td>${ponto.observacoes || ''}
+                                    ${ponto.fonte && ponto.fonte.toLowerCase() !== 'fonte' ? ` (<a href="${ponto.fonte}" target="_blank">Fonte</a>)` : ''}
+                                </td>
+                            </tr>
+                `;
+            });
+
+            resultadosHTML += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        section.innerHTML = resultadosHTML;
+    } else {
+        section.innerHTML = "<p>Nenhum resultado encontrado para a sua busca.</p>";
+        // Se não encontrar resultados, também queremos que a seção esteja visível para mostrar a mensagem.
+    }
 }
