@@ -6,7 +6,7 @@
 /* Estiliza o corpo da página */
 body {
     font-family: "Rubik", sans-serif;
-    background-color: #A9CCE3;
+    background: linear-gradient(135deg, #e8f5e9, #ffffff);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,32 +52,31 @@ form {
 /* Estiliza os inputs dentro das seções */
 section input {
     width: 30rem;
-    border: none;
     padding: 1rem;
-    border-radius: 1.5rem;
-    margin-bottom: 1rem;
-    background-color: #ffffff;   
-    font-size: 1rem;
-    box-sizing: border-box;
-    /* Removido: flex-direction, display, justify-content, align-items, pois o form já fará isso */
+    border-radius: 2rem;
+    border: 2px solid #4CAF50;
+    outline: none;
+    transition: 0.3s;
 }
+
+section input:focus {
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+}
+/* Removido: flex-direction, display, justify-content, align-items, pois o form já fará isso */
 
 /* Estiliza os botões dentro das seções */
 section button {
-    padding: 0.8rem 1.2rem;
-    border: none;
-    border-radius: 1.5rem;
-    background-color: #ffffff;
-    color: #3d3c3c;
-    font-size: 1rem;
-    cursor: pointer;
-    /* Removido: flex-direction, display, justify-content, align-items, pois o form já fará isso */
+    background: #4CAF50;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
 }
+/* Removido: flex-direction, display, justify-content, align-items, pois o form já fará isso */
 
 /* Adiciona efeito hover ao botão de pesquisa */
 section button:hover {
-    background-color: #26384C;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: #388E3C;
+    transform: scale(1.05);
 }
 
 /* Estiliza a caixa de resultados da pesquisa */
@@ -86,8 +85,8 @@ section button:hover {
     max-height: 60vh;
     overflow-y: auto;
     margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 0.6rem;
+    border-radius: 1rem;
+    padding: 2rem;
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     color: #45474B;
@@ -103,7 +102,13 @@ section button:hover {
     margin-bottom: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     text-align: center;
+    transition: 0.3s;
 }
+
+.item-resultado:hover {
+    transform: translateY(-5px);
+}
+
 
 .item-resultado h2 {
     font-size: 1.8rem;
@@ -184,7 +189,7 @@ section button:hover {
 
 /* Estiliza o rodapé da página */
 footer {
-    background-color: #A9CCE3;
+    background: linear-gradient(135deg, #e8f5e9, #ffffff);
     color: #3d3c3c;
     text-align: center;
     padding: 0;
