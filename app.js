@@ -56,7 +56,7 @@ function pesquisar() {
                             <tr>
                                 <td>${ponto.tipoDeResiduo || ''}</td>
                                 <td>${ponto.nomeServico || ''}</td>
-                                <td>${ponto.contato || ''}</td>
+                                <td>${ponto.contato?.includes("http")? `<a href="${ponto.contato}" target="_blank">Acessar</a>`: ponto.contato || ''}</td>
                                 <td>${ponto.observacoes || ''}
                                     ${ponto.fonte && ponto.fonte.toLowerCase() !== 'fonte' ? ` (<a href="${ponto.fonte}" target="_blank">Fonte</a>)` : ''}
                                 </td>
