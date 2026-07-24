@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>EcoGuia</title>
+    <link rel="icon" type="image/png" href="minilogo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +23,7 @@
         <section>
         <form onsubmit="pesquisar(); return false;" aria-label="Pesquisar cidade para coleta">
         <label for="campo-pesquisa" class="visually-hidden">Nome da cidade</label>
-        <input type="text" id="campo-pesquisa" placeholder="Digite o nome da sua cidade ou município" aria-required="true">
+        <input type="text" id="campo-pesquisa" placeholder="Digite o nome da sua cidade ou município" aria-required="true" autocomplete="off">
         <button type="submit">Pesquisar</button>
         </form>
         </section>
@@ -41,7 +42,6 @@
 
     </footer>
 
-    <script src="dados.js"></script>
     <script src="app.js"></script>
 
 </body>
