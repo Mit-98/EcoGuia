@@ -1,27 +1,51 @@
 // app.js
 
+// 1. Nova função que remove os acentos de qualquer texto
+function removerAcentos(texto) {
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+}
+let dados = []; // Variável global vazia que vai receber os dados
+
+// Faz o fetch assim que o arquivo app.js é lido
+fetch('dados.json')
+    .then(resposta => resposta.json())
+    .then(dadosConvertidos => {
+        dados = dadosConvertidos; // Preenche a variável com os dados do JSON
+        console.log("Banco de dados carregado com sucesso!");
+    })
+    .catch(erro => console.error("Erro ao carregar o JSON:", erro));
+
+function removerAcentos(texto) {
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+}
 function pesquisar() {
     const section = document.getElementById("resultados-pesquisa");
-    const campoPesquisa = document.getElementById("campo-pesquisa").value.toLowerCase().trim();
+    
+    // 2. Aplicamos a função no que o usuário digitou
+    const campoPesquisaOriginal = document.getElementById("campo-pesquisa").value.toLowerCase().trim();
+    const campoPesquisa = removerAcentos(campoPesquisaOriginal);
 
-    // Adiciona esta linha para garantir que a seção esteja visível ao iniciar uma pesquisa
-    section.style.display = 'block'; // Torna a seção visível
+    section.style.display = 'block'; 
 
     if (!campoPesquisa) {
         section.innerHTML = "<p>Por favor, digite algo na barra de pesquisa!</p>";
-        // Se a pesquisa estiver vazia, pode ser útil ocultar a seção novamente ou deixá-la visível com a mensagem.
-        // Para este caso, vamos deixá-la visível com a mensagem.
         return;
     }
 
-    section.innerHTML = ''; // Limpa resultados anteriores
+    section.innerHTML = ''; 
 
+    // 3. Aplicamos a função nos títulos do nosso banco de dados
     const cidadeEncontrada = dados.find(dado => {
-        const tituloMatches = dado.titulo && dado.titulo.toLowerCase().includes(campoPesquisa);
-        const localidadeMatches = dado.localidade && dado.localidade.toLowerCase().includes(campoPesquisa);
+        const tituloNormalizado = removerAcentos(dado.titulo ? dado.titulo.toLowerCase() : "");
+        const localidadeNormalizada = removerAcentos(dado.localidade ? dado.localidade.toLowerCase() : "");
+        
+        const tituloMatches = tituloNormalizado.includes(campoPesquisa);
+        const localidadeMatches = localidadeNormalizada.includes(campoPesquisa);
+        
         return tituloMatches || localidadeMatches;
     });
 
+    // ... (o restante do código daqui para baixo continua igualzinho estava antes)
     if (cidadeEncontrada) {
         let resultadosHTML = '';
 
@@ -73,7 +97,7 @@ function pesquisar() {
 
         section.innerHTML = resultadosHTML;
     } else {
-        section.innerHTML = "<p>Nenhum resultado encontrado para a sua busca.</p>";
+        section.innerHTML = "<p class='mensagem-erro'>Nenhum resultado encontrado. Verifique a ortografia ou tente outra cidade.</p>";
         // Se não encontrar resultados, também queremos que a seção esteja visível para mostrar a mensagem.
     }
 }
