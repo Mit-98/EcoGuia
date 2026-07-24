@@ -2,11 +2,16 @@
 
 /* Importa a fonte Rubik do Google Fonts (link correto) */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-
+:root {
+    --cor-primaria: #4CAF50;
+    --cor-secundaria: #388E3C;
+    --cor-fundo-inicio: #e8f5e9;
+    --cor-fundo-fim: #ffffff;
+}
 /* Estiliza o corpo da página */
 body {
     font-family: "Rubik", sans-serif;
-    background: linear-gradient(135deg, #e8f5e9, #ffffff);
+    background: linear-gradient(135deg, var(--cor-fundo-inicio), var(--cor-fundo-fim));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,6 +51,7 @@ form {
     flex-direction: column; /* Coloca os itens (input e button) em coluna */
     align-items: center; /* Centraliza horizontalmente os itens dentro do formulário */
     width: 100%; /* Garante que o formulário ocupe a largura total de sua seção pai */
+    gap: 1.5rem;
 }
 
 
@@ -54,28 +60,38 @@ section input {
     width: 30rem;
     padding: 1rem;
     border-radius: 2rem;
-    border: 2px solid #4CAF50;
+    border: 2px solid var(--cor-primaria);
     outline: none;
     transition: 0.3s;
 }
 
 section input:focus {
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.4); /* (Pode deixar essa como RGBA pela opacidade) */
+}
+/* Suaviza o texto de dica dentro do input */
+section input::placeholder {
+    color: #a0aab2;
+    font-style: italic;
+    opacity: 0.8;
 }
 /* Removido: flex-direction, display, justify-content, align-items, pois o form já fará isso */
 
 /* Estiliza os botões dentro das seções */
 section button {
-    background: #4CAF50;
+    background: var(--cor-primaria);
     color: white;
     font-weight: bold;
     transition: 0.3s;
+    padding: 1rem 2rem; /* Deixa o botão mais "gordinho" */
+    border: none; /* Tira a borda padrão feia do navegador */
+    border-radius: 2rem; /* Deixa as pontas arredondadas igual a barra de pesquisa */
+    cursor: pointer; /* Faz a setinha do mouse virar uma "mãozinha" ao passar por cima */
 }
 /* Removido: flex-direction, display, justify-content, align-items, pois o form já fará isso */
 
 /* Adiciona efeito hover ao botão de pesquisa */
 section button:hover {
-    background: #388E3C;
+    background: var(--cor-secundaria);
     transform: scale(1.05);
 }
 
@@ -108,8 +124,17 @@ section button:hover {
 .item-resultado:hover {
     transform: translateY(-5px);
 }
-
-
+/* Estiliza a mensagem quando a cidade não é encontrada */
+.mensagem-erro {
+    text-align: center;
+    color: #e74c3c; /* Um tom de vermelho/laranja suave */
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 2rem;
+    background-color: #fdf5f5;
+    border-radius: 0.6rem;
+    border: 1px dashed #e74c3c;
+}
 .item-resultado h2 {
     font-size: 1.8rem;
     color: #222831;
@@ -294,4 +319,22 @@ footer {
     .tabela-pontos-coleta td:before {
         width: 35%;
     }
+    /* Estiliza a barra de rolagem da caixa de resultados */
+#resultados-pesquisa::-webkit-scrollbar {
+    width: 8px; /* Deixa a barra mais fininha e elegante */
+}
+
+#resultados-pesquisa::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+}
+
+#resultados-pesquisa::-webkit-scrollbar-thumb {
+    background: var(--cor-primaria); /* Usa o seu verde! */
+    border-radius: 10px;
+}
+
+#resultados-pesquisa::-webkit-scrollbar-thumb:hover {
+    background: var(--cor-secundaria); 
+}
 }
